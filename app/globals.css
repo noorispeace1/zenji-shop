@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Hide default cursor to use our custom Katana cursor */
+html, body, button, a, input, select {
+  cursor: none !important;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer utilities {
+  /* CRT Scanlines Overlay */
+  .bg-scanlines {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.3)
+    );
+    background-size: 100% 4px;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Dark side scanlines */
+  .bg-scanlines-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 50%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.08)
+    );
+    background-size: 100% 4px;
+  }
+
+  /* 3D Chrome Text Shadow effect for ZENJI logo */
+  .text-shadow-3d {
+    text-shadow: 
+      1px 1px 0px rgba(0, 0, 0, 0.8),
+      2px 2px 0px rgba(0, 0, 0, 0.7),
+      3px 3px 0px rgba(0, 0, 0, 0.6),
+      4px 4px 0px rgba(0, 0, 0, 0.5),
+      5px 5px 0px rgba(0, 0, 0, 0.4),
+      6px 6px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Chrome metallic text fill pattern */
+  .chrome-text {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e2e8f0 35%,
+      #94a3b8 45%,
+      #475569 50%,
+      #cbd5e1 55%,
+      #f8fafc 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Keyframe Animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes pulse-kanji {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 0.9;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+.animate-glitch {
+  animation: glitch 0.4s ease-in-out infinite alternate;
+}
+
+.animate-pulse-kanji {
+  animation: pulse-kanji 4s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
 }
