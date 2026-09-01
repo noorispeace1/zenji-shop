@@ -3,16 +3,20 @@
 import React, { useState } from "react";
 import Navbar from "@/src/component/Navbar";
 import Banner from "@/src/component/Banner";
+import LatestDrops from "@/src/component/LatestDrops";
 import AboutBanner from "@/src/component/AboutBanner";
 import ZenjiEthos from "@/src/component/ZenjiEthos";
 import Footer from "@/src/component/Footer";
 import Preloader from "@/src/component/Preloader";
+import PromoModal from "@/src/component/PromoModal";
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(false);
 
   return (
     <main className="min-h-screen bg-black text-white relative font-sans overflow-x-hidden">
+      {/* Promo Modal Popup matching screenshot */}
+      <PromoModal />
       {/* Replay Preloader component when triggered */}
       {showPreloader && (
         <Preloader onComplete={() => setShowPreloader(false)} />
@@ -29,6 +33,9 @@ export default function Home() {
 
       {/* 4-Panel Photoshoot Ethos Banner */}
       <ZenjiEthos />
+
+      {/* Full-width Horizontal Slider Latest Drops Collection Section matching screenshot */}
+      <LatestDrops />
 
       {/* Footer Section */}
       <Footer />
